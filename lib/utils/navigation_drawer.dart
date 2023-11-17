@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/screens/about_me.dart';
 import 'package:meals_app/screens/favorites_meal.dart';
+import 'package:meals_app/screens/home.dart';
 
 class Navigation extends StatefulWidget {
   const Navigation({super.key});
@@ -54,9 +56,16 @@ class _BuildMenuItemsState extends State<BuildMenuItems> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const ListTile(
+        ListTile(
           leading: Icon(Icons.home_outlined),
           title:Text('Home'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) {
+              return const Home();
+            },)
+            );
+          },
         ),
         ListTile(
           leading: const Icon(Icons.favorite,color: Colors.red),
@@ -69,9 +78,16 @@ class _BuildMenuItemsState extends State<BuildMenuItems> {
             );
           },
         ),
-        const ListTile(
+        ListTile(
           leading: Icon(Icons.person),
-          title:Text('Perfil'),
+          title:Text('About Me'),
+          onTap: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) {
+              return const AboutMe();
+            },)
+            );
+          },
         ),
       ],
     );

@@ -27,9 +27,10 @@ class _CategoryItemState extends State<CategoryItem> {
           );
         },
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 10),
               child: Hero(
                   tag: widget.category.id,
                   child: image
