@@ -67,17 +67,17 @@ class _MealItemState extends State<MealItem> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(' CATEGORY : ${_mealDetail?[0].category??''}'),
+                  Text('CATEGORY : ${_mealDetail?[0].category??''}'),
                   const SizedBox(height: 10,),
-                  Text(' AREA : ${_mealDetail?[0].area??''}'),
+                  Text('AREA : ${_mealDetail?[0].area??''}'),
                   const SizedBox(height: 10,),
                   Text('INGREDIENT : ${_mealDetail?[0].ingredient1??''} / '
                       '${_mealDetail?[0].ingredient1??''} / '
                       '${_mealDetail?[0].ingredient2??''} / '
                       '${_mealDetail?[0].ingredient3??''} / '
                       '${_mealDetail?[0].ingredient4??''} and more.'),
-                  const SizedBox(height: 10,),
-                  const Text('INSTRUCTIONS : '),
+                  const SizedBox(height: 25,),
+                  const Text('INSTRUCTIONS',style: TextStyle(fontSize: 20)),
                   const SizedBox(height: 10,),
                   Text(_mealDetail?[0].instructions??''),
                   const SizedBox(height: 10,),
