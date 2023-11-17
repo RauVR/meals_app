@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/models/meal.dart';
+import 'package:meals_app/repositories/meal_repository.dart';
 import 'package:meals_app/screens/meal_item.dart';
 import 'package:meals_app/services/meal_service.dart';
 
@@ -45,11 +47,7 @@ class _MealListState extends State<MealList> {
                   },)
                   );
                 },
-                child: ListTile(
-                    leading: Image.network(_meals?[index].imageUrl),
-                    title: Text(_meals?[index].name??''),
-                    trailing: const Icon(Icons.favorite),
-                ),
+                child: MealsBoxes(meal: _meals?[index],),
               ),
             )
 
@@ -61,6 +59,59 @@ class _MealListState extends State<MealList> {
 }
 
 
+class MealsBoxes extends StatefulWidget {
+  final Meal meal;
+  const MealsBoxes({super.key, required this.meal});
+
+  @override
+  State<MealsBoxes> createState() => _MealsBoxesState();
+}
+
+class _MealsBoxesState extends State<MealsBoxes> {
+
+  bool _favorite=false;
+  MealRepository? _repository;
+
+  initialize() async {
+    _favorite = await _repository?.isFavorite(widget.meal)??false;
+    if(mounted){
+      setState(() {
+        _favorite = _favorite;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    _repository=MealRepository();
+    initialize();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+    final image = Image.network(widget.meal.imageUrl);
+    final icon = _favorite?const Icon(Icons.favorite,color: Colors.red,)
+        :const Icon(Icons.favorite,color: Colors.white54,);
+
+    return ListTile(
+      leading: image,
+      title: Text(widget.meal.name??''),
+      trailing: IconButton(
+        icon: icon,
+        onPressed: () {
+          setState(() {
+            _favorite=!_favorite;
+          });
+          _favorite
+              ?_repository?.insert(widget.meal)
+              :_repository?.delete(widget.meal);
+        },
+      ),
+    );
+  }
+}
 
 
 

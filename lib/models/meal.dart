@@ -9,4 +9,18 @@ class Meal{
         id=json['idMeal'],
         name=json['strMeal'],
         imageUrl=json['strMealThumb'];
+
+  Map<String,dynamic>toMap(){
+    return{
+      'id':id,
+      'name':name,
+      'imageUrl':imageUrl,
+    };
+  }
+
+  Meal.fromMap(Map<String,dynamic>map):
+    id=map['id'],
+    name=map['name'],
+    imageUrl=map['imageUrl'];
+
 }

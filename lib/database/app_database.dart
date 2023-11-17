@@ -8,16 +8,16 @@ class AppDatabase{
   //final String tableName='category';
   //final String tableName = 'mealsDetails';
 
-  Database? db;
+  Database? _db;//lo hacemos privado por que no se debe acceder desde fuera de la base de datos
 
   Future<Database> openDB() async{
-    db??=await openDatabase(
+    _db??=await openDatabase(
         join(await getDatabasesPath(),databaseName),
         onCreate: (database,version){
-          database.execute('create table $tableName (id primary key text, name text)');
+          database.execute('create table $tableName (id text primary key, name text, imageUrl text)');
         },
         version: version
     );
-    return db as Database;
+    return _db as Database;
   }
 }
